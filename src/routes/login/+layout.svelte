@@ -10,26 +10,22 @@
   }
 </script>
 
-<div class="flex items-center justify-center h-screen w-screen">
+<nav class="flex justify-center my-6">
   <ul class="steps">
-    <li class = "step step-primary"><a href="/login">Register</a></li>
-    
-    <li class="step" class:step-primary={$page.route.id?.match(/username|photo/g)}>
-      <a
-        href="/login/photo"
-    
-      >
-        Upload Photo</a
-      >
-    </li>
-
-    <li class="step" class:step-primary={$page.route.id?.includes("username")}>
-      <a
-        href="username"
-        >Username</a
-      >
-    </li>
+    <a href="/login" class="step step-primary">Sign In</a>
+    <a
+      href="/login/username"
+      class="step"
+      class:step-primary={$page.route.id?.match(/username|photo/g)}>
+      Choose Username
+    </a>
+    <a
+      href="/login/photo"
+      class="step"
+      class:step-primary={$page.route.id?.includes("photo")}>
+      Upload Photo
+    </a>
   </ul>
-</div>
+</nav>
 
 <slot />
