@@ -27,13 +27,14 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const auth = getAuth();
 export const storage = getStorage();
-function userStore(): Readable<User | null> {
+function userStore() {
+  let unsubscribe: () => void;  
 
-  if (!auth || globalThis.window === undefined) {
+  if (!auth || !globalThis.window) {
     console.warn("Firebase not initialized");
-    const { subcribe } = writable<User | null>(null);
+    const { subscribe } = writable<User | null>(null);
     return {
-      subcribe
+      subscribe,
     };
   }
 

@@ -1,9 +1,10 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import { user } from "$lib/firebase";
+  import AuthCheck from "$lib/Components/AuthCheck.svelte";
 
-  export let data: PageData;
 </script>
-
+<AuthCheck>
   <form class="max-w-screen-md w-full">
     <div class="form-control w-full max-w-xs my-10 mx-auto text-center">
       <img alt="photoURL" width="256" height="256" class="mx-auto" />
@@ -18,5 +19,7 @@
       />
     </div>
   </form>
+    
+</AuthCheck>
 
 <!-- <a {href} class="btn btn-primary"> Finish </a> -->
