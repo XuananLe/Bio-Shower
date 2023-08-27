@@ -1,9 +1,19 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+import { writable, type Readable, derived } from "svelte/store";
 
-// Your web app's Firebase configuration
+
+interface UserData {
+  username: string;
+  bio: string;
+  photoURL: string;
+  published: boolean;
+  links: any[];
+}
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAkTqY9d5oaE-5lJ9xioj0QhLwWKCzIAM0",
   authDomain: "bioshower-ec68d.firebaseapp.com",
@@ -13,5 +23,30 @@ const firebaseConfig = {
   appId: "1:326009198291:web:832834e3a90225893de626"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore();
+export const auth = getAuth();
+export const storage = getStorage();
+function userStore(): Readable<User | null> {
+
+  if (!auth || globalThis.window === undefined) {
+    console.warn("Firebase not initialized");
+    const { subcribe } = writable<User | null>(null);
+    return {
+      subcribe
+    };
+  }
+
+
+  const store = writable(auth?.currentUser ?? null);
+
+  onAuthStateChanged(auth, (user) => {
+    store.set(user);
+  });
+
+  return {
+    subscribe: store.subscribe
+  };
+}
+
+export const user = userStore(); // Export store để có thể sử dụng ở các thành phần khác

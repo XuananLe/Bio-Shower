@@ -5,6 +5,6 @@
 
 {#key $page.url}
   <div in:fly={{  x:'-100%', duration: 500 }}>
-    <slot  />
+    <slot/>
   </div>
 {/key}

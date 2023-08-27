@@ -4,7 +4,6 @@
   export let data: PageData;
 </script>
 
-<div class="flex justify-center items-center h-screen">
   <form class="max-w-screen-md w-full">
     <div class="form-control w-full max-w-xs my-10 mx-auto text-center">
       <img alt="photoURL" width="256" height="256" class="mx-auto" />
@@ -19,6 +18,5 @@
       />
     </div>
   </form>
-</div>
 
 <!-- <a {href} class="btn btn-primary"> Finish </a> -->

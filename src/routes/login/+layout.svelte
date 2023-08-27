@@ -1,7 +1,9 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
+  import { fly } from "svelte/transition";
   import type { LayoutData } from "./$types";
+  import AnimatedRoute from "$lib/Components/AnimatedRoute.svelte";
 
   export let data: LayoutData;
 
@@ -27,5 +29,10 @@
     </a>
   </ul>
 </nav>
-
-<slot />
+<AnimatedRoute>
+  <main class="card w-4/6 bg-neutral text-neutral-content mx-auto">
+    <div class="card-body items-center text-center">
+      <slot />
+    </div>
+  </main>
+</AnimatedRoute>
