@@ -1,5 +1,8 @@
 <script lang="ts">
     import type { LayoutData } from './$types';
     
+    export let data: LayoutData;
 </script>
-<slot/>
+<div class = "min-h-screen flex flex-col">
+    <slot/>
+</div>
